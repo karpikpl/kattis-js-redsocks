@@ -14,12 +14,18 @@ function solution(toPrint, toRead) {
         const q = parseInt(input[1]);
 
         log(`Parsed input p: ${p} q: ${q}`);
+
+        if (p === 0 && q === 0) {
+            // Input is terminated by a line consisting of two zeroes.
+            return;
+        }
+
         let isSolved = false;
         const max = 50000;
         const start = new Date();
 
-        if (p === 0) {
-            log('p == 0 - impossible')
+        if (p === 0 || p / q < 2 / (max * max - 1)) {
+            log('p == 0 - impossible');
             print('impossible');
             continue;
         }
@@ -30,14 +36,14 @@ function solution(toPrint, toRead) {
                 break;
             }
 
-            for (let n = Math.max(Math.floor(Math.sqrt(q*x*(x-1)/p))-1, x); n <= q * x / p; n++) {
+            for (let n = Math.max(Math.floor(Math.sqrt(q * x * (x - 1) / p)) - 1, x); n <= q * x / p; n++) {
                 const prob = (x * (x - 1)) / (n * (n - 1));
 
                 //log(`x:${x} n:${n}  prob:${prob} p/q:${p/q}`);
 
                 if (prob == p / q) {
-                    print(`${x} ${n-x}`);
-                    log(`${x} ${n-x}`);
+                    print(`${x} ${n - x}`);
+                    log(`${x} ${n - x}`);
                     isSolved = true;
                     break;
                 }
@@ -84,10 +90,7 @@ if (typeof process !== 'undefined' && process.argv[2] === 'i') {
     const Readline = require('readline');
     const input = [];
 
-    const inputProcessor = Readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
+    const inputProcessor = Readline.createInterface({input: process.stdin, output: process.stdout});
 
     inputProcessor.on('line', (line) => {
 
@@ -109,7 +112,7 @@ if (typeof process !== 'undefined' && process.argv[2] === 'i') {
 // input from process params
 if (typeof process !== 'undefined' && process.argv[2] && process.argv[2] !== 'i') {
 
-    const input = process.argv[2].split('\n');
+    const input = process.argv[2].split('\\n');
     init(console.log, () => input.shift());
 
     solution();
