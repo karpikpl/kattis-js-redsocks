@@ -11,7 +11,7 @@ function testSolution(input) {
     Index.init((ans) => result.push(ans), () => input.shift());
     Index.solution();
 
-    return result.length == 1 && result[0] || result;
+    return result;
 }
 
 describe('Solution', function() {
@@ -19,23 +19,43 @@ describe('Solution', function() {
     describe('program', function() {
 
         [{
-            input: ['6 6'],
-            result: 7
-        }, {
-            input: ['6 4'],
-            result: ['5', '6', '7']
-        }, {
-            input: ['12 20'],
+            input: ['1 2',
+                '6 8',
+                '12 2499550020',
+                '56 789',
+                '0 0'
+            ],
+            result: ['3 1',
+                '7 1',
+                '4 49992',
+                'impossible',
+                'impossible'
+            ]
+        }].forEach((testCase) => {
+
+            it('should solve for ' + testCase.input, function() {
+
+                // Arrange
+                const input = testCase.input;
+
+                // Act
+                const result = testSolution(input);
+
+                // Assert
+                assert.deepEqual(result, testCase.result);
+            });
+
+        })
+    });
+
+    describe('program', function() {
+
+        [{
+            input: [
+                '56 789'
+            ],
             result: [
-                '13',
-                '14',
-                '15',
-                '16',
-                '17',
-                '18',
-                '19',
-                '20',
-                '21'
+                'impossible'
             ]
         }].forEach((testCase) => {
 
