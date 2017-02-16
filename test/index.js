@@ -67,7 +67,7 @@ describe('Solution', function() {
 
         })
 
-        it.skip('should solve for random data', function() {
+        it('should solve for random data', function() {
 
             this.timeout(15000);
 

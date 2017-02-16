@@ -25,7 +25,7 @@ function solution(toPrint, toRead) {
         const start = new Date();
 
         if (p === 0 || p / q < 2 / (max * max - 1)) {
-            log('p == 0 - impossible');
+            log('p == 0 - impossible  - cant get probability smaller than 2 red socks and 49998 black');
             print('impossible');
             continue;
         }
@@ -36,7 +36,9 @@ function solution(toPrint, toRead) {
                 break;
             }
 
-            for (let n = Math.max(Math.floor(Math.sqrt(q * x * (x - 1) / p)) - 1, x); n <= q * x / p; n++) {
+            // n has to be greater equal than √qx(x-1)/p
+
+            for (let n = Math.max(Math.floor(Math.sqrt(q * x * (x - 1) / p)) - 1, x); n <= max; n++) {
                 const prob = (x * (x - 1)) / (n * (n - 1));
 
                 //log(`x:${x} n:${n}  prob:${prob} p/q:${p/q}`);
@@ -49,6 +51,7 @@ function solution(toPrint, toRead) {
                 }
 
                 if (prob < p / q) {
+                    // probability just gets smaller with every n, so no need to check
                     break;
                 }
 
@@ -57,7 +60,7 @@ function solution(toPrint, toRead) {
 
         if (!isSolved) {
             print('impossible');
-            log('impossible')
+            log('impossible - no solution found')
         }
 
         log(`Solved p: ${p} q: ${q} in ${new Date() - start}`);
