@@ -24,8 +24,14 @@ function solution(toPrint, toRead) {
         const max = 50000;
         const start = new Date();
 
-        if (p === 0 || p / q < 2 / (max * max - 1)) {
-            log('p == 0 - impossible  - cant get probability smaller than 2 red socks and 49998 black');
+        if (p === 0) {
+          log('p == 0 - no red, just black');
+          print('0 2');
+          continue;
+        }
+
+        if (p / q < 2 / (max * max - 1)) {
+            log('impossible  - cant get probability smaller than 2 red socks and 49998 black');
             print('impossible');
             continue;
         }

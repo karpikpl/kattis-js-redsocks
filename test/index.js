@@ -122,6 +122,19 @@ describe('Solution', function() {
             assert.deepEqual(result, solution, `solution should match for ${input}`);
         });
 
+        it('should return "0 2" when p is 0', function() {
+
+            // Arrange
+            const input = ['0 123123', '0 1'];
+            const solution = ['0 2', '0 2'];
+
+            // Act
+            const result = testSolution(input);
+
+            // Assert
+            assert.deepEqual(result, solution, `solution should match for ${input}`);
+        });
+
         function calculateProb(answer) {
             const array = answer[0].split(' ');
             const red = parseInt(array[0]);
